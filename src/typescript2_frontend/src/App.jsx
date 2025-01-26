@@ -1,30 +1,25 @@
-import { useState } from 'react';
-import { typescript2_backend } from 'declarations/typescript2_backend';
-
+import { useState } from "react";
+//import { typescript2_backend } from 'declarations/typescript2_backend';
+import { Route, BrowserRouter, Routes } from "react-router-dom";
+import Welcome from "./components/welcome";
+import NewsLetter from "./components/newsletter";
+import Details from "./components/detaills";
+import Profile from "./components/profile";
+import AddNewsLetter from "./components/addnewsletter";
+import { AuthProvider } from "./auth/authetication";
 function App() {
-  const [greeting, setGreeting] = useState('');
-
-  function handleSubmit(event) {
-    event.preventDefault();
-    const name = event.target.elements.name.value;
-    typescript2_backend.greet(name).then((greeting) => {
-      setGreeting(greeting);
-    });
-    return false;
-  }
-
   return (
-    <main>
-      <img src="/logo2.svg" alt="DFINITY logo" />
-      <br />
-      <br />
-      <form action="#" onSubmit={handleSubmit}>
-        <label htmlFor="name">Enter your name: &nbsp;</label>
-        <input id="name" alt="Name" type="text" />
-        <button type="submit">Click Me!</button>
-      </form>
-      <section id="greeting">{greeting}</section>
-    </main>
+    <BrowserRouter>
+      <AuthProvider>
+        <Routes>
+          <Route path="/" element={<Welcome />} />
+          <Route path="/newsletter" element={<NewsLetter />} />
+          <Route path="/details/:id" element={<Details />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/create" element={<AddNewsLetter />} />
+        </Routes>
+      </AuthProvider>
+    </BrowserRouter>
   );
 }
 

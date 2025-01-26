@@ -14,5 +14,9 @@
   "type": "module",
   "workspaces": [
     "src/typescript2_frontend"
-  ]
+  ],
+  "dependencies": {
+    "@dfinity/auth-client": "^2.2.0",
+    "@dfinity/utils": "^2.9.0"
+  }
 }
